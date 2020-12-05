@@ -1,30 +1,9 @@
 #include "../include/Zlecenie.hpp"
 #include <iostream>
-#include <iterator>
+#include <random>
+#include<ctime>
+#include <cstdlib>
 
-namespace api
-{
-	enum class TypBota
-	{
-		CASUAL,
-		CARKOWY,
-		POD_SERWER_MC,
-		JOCHEMA
-	};
-
-	struct BotDiscord
-	{
-		std::string nazwa{ "Dawid" };
-		unsigned int id{ 0u };
-		std::string wiadomoscPowitalna{ "H e l o!" };
-		TypBota typ{ TypBota::CASUAL };
-	};
-
-	void ZamienBota(BotDiscord* bot, BotDiscord zamiennik)
-	{
-		*bot = zamiennik;
-	}
-}
 
 namespace zadanie
 {
@@ -58,7 +37,7 @@ namespace zadanie
 			std::cout << zp.imie << " " << zp.nazwisko << "\n";
 		}
 		
-		zadanie::StanPacjenta Stan{ zadanie::StanPacjenta::MARTWY};
+		zadanie::StanPacjenta Stan{ zadanie::StanPacjenta::ZAGROZONY};
 		std::cout << "Stan pacjenta : ";
 		switch (Stan)
 		{
@@ -75,7 +54,28 @@ namespace zadanie
 			std::cout << "Martwy!\n";
 			break;
 		}
-
+		std::mt19937 mersenne{ (unsigned int)std::time(nullptr) };
+		std::uniform_int_distribution<> zakres{ 1, 2 };
+		int szansa{ zakres(mersenne) };
+		switch (Stan)
+		{
+		case zadanie::StanPacjenta::ZDROWY:
+			break;
+		case zadanie::StanPacjenta::CHORY:
+			if (szansa == 1)
+				std::cout << "Pacjent wyzdrowial!\n";
+			else
+				std::cout << "Pacjent umarl!\n";
+			break;
+		case zadanie::StanPacjenta::ZAGROZONY:
+			if (szansa == 1)
+				std::cout << "Pacjent wyzdrowial!\n";
+			else
+				std::cout << "Pacjent umarl!\n";
+			break;
+		case zadanie::StanPacjenta::MARTWY:
+			break;
+		}
 		return 0;
 	}
 
