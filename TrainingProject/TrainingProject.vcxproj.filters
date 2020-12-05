@@ -18,7 +18,7 @@
     <ClCompile Include="src\Main.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="include\Math.hpp">
+    <ClCompile Include="include\Zlecenie.hpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
