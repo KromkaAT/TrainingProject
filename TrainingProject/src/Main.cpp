@@ -7,7 +7,7 @@
 
 namespace zadanie
 {
-	enum class StanPacjenta
+	enum class StanPacjenta // Stan w jakim znajduje sie pacjent
 	{
 		ZDROWY,
 		CHORY,
@@ -15,13 +15,13 @@ namespace zadanie
 		MARTWY,
 		WYMAGA_OPERACJI
 	};
-	struct Pacjent
+	struct Pacjent // Dane pacjenta
 	{
 		std::string imie{ "Dawid" };
 		std::string nazwisko{ "Plantecki" };
 		StanPacjenta stan{ StanPacjenta::ZDROWY };
 	};
-	enum class ChorobaPacjenta
+	enum class ChorobaPacjenta // Choroby jakie pacjent mo¿e mieæ
 	{
 		BRAK,
 		ZAWAL_SERCA,
@@ -38,19 +38,19 @@ namespace zadanie
 		std::string zgoda{};
 		zadanie::Pacjent kofokles[]
 		{
-			{"Dawicki", "Kofok", zadanie::StanPacjenta::ZDROWY}
+			{"Andrzej", "Majewski", zadanie::StanPacjenta::ZDROWY} // Dane wybranego pacjenta
 		};
 		std::cout << "Pacjent : ";
-		for (size_t i{ 0 }; i < std::size(kofokles); ++i)
+		for (size_t i{ 0 }; i < std::size(kofokles); ++i) // Wypisanie imienia i nazwiska pacjenta
 		{
 			zadanie::Pacjent zp{ kofokles[i] };
 			std::cout << zp.imie << " " << zp.nazwisko << "\n";
 		}
 		
-		zadanie::StanPacjenta Stan{ zadanie::StanPacjenta::CHORY};
-		zadanie::ChorobaPacjenta Choroba{ zadanie::ChorobaPacjenta::ZLAMANIE };
+		zadanie::StanPacjenta Stan{ zadanie::StanPacjenta::CHORY};				// Wybranie stanu pacjenta
+		zadanie::ChorobaPacjenta Choroba{ zadanie::ChorobaPacjenta::ZLAMANIE }; // Wybranie choroby pacjenta
 		std::cout << "Stan pacjenta : ";
-		switch (Stan)
+		switch (Stan) // Wypisanie stanu pacjenta i jego choroby
 		{
 		case zadanie::StanPacjenta::ZDROWY:
 			std::cout << "Zdrowy!\n";
@@ -91,12 +91,14 @@ namespace zadanie
 			std::cout << "Wymaga operacji!\n";
 			break;
 		}
-		std::mt19937 mersenne{ (unsigned int)std::time(nullptr) };
+		std::mt19937 mersenne{ (unsigned int)std::time(nullptr) }; // Losowoœæ szansy na prze¿ycie pacjenta
 		std::uniform_int_distribution<> zakres{ 1, 2 };
-		int szansa{ zakres(mersenne) };
+		std::uniform_int_distribution<> zakres1{ 1, 3 };
+		int szansa{ zakres(mersenne) };		// Zwykle choroby
+		int szansa1{ zakres1(mersenne) };   // Choroby bardziej zaawansowane
 		switch (Stan)
 		{
-		case zadanie::StanPacjenta::ZDROWY:
+		case zadanie::StanPacjenta::ZDROWY: // Wypisanie co sie stalo z pacjentem po operacji/chorobie
 			break;
 		case zadanie::StanPacjenta::CHORY:
 			if (Choroba == zadanie::ChorobaPacjenta::ZLAMANIE);
@@ -116,7 +118,7 @@ namespace zadanie
 				std::cout << "Pacjent umarl!\n";
 			break;
 		case zadanie::StanPacjenta::ZAGROZONY:
-			if (szansa == 1)
+			if (szansa1 == 1)
 				std::cout << "Pacjent wyzdrowial!\n";
 			else
 				std::cout << "Pacjent umarl!\n";
@@ -124,7 +126,7 @@ namespace zadanie
 		case zadanie::StanPacjenta::MARTWY:
 			break;
 		case zadanie::StanPacjenta::WYMAGA_OPERACJI:
-			std::cout << "Czy zgadzasz sie na operacje?\n";
+			std::cout << "Czy zgadzasz sie na operacje?\n"; 
 			std::cin >> zgoda;
 			if (zgoda == "tak" || zgoda == "Tak" || zgoda == "TAK")
 			{
