@@ -12,23 +12,33 @@ namespace zadanie
 		ZDROWY,
 		CHORY,
 		ZAGROZONY,
-		MARTWY
+		MARTWY,
+		WYMAGA_OPERACJI
 	};
 	struct Pacjent
 	{
 		std::string imie{ "Dawid" };
 		std::string nazwisko{ "Plantecki" };
 		StanPacjenta stan{ StanPacjenta::ZDROWY };
-
+	};
+	enum class ChorobaPacjenta
+	{
+		BRAK,
+		ZAWAL_SERCA,
+		WSTRZAS_MOZGU,
+		ZLAMANIE,
+		ZATRUCIE_POKARMOWE,
+		BIALACZKA
 	};
 
 }
 
 	int main()
 	{
+		std::string zgoda{};
 		zadanie::Pacjent kofokles[]
 		{
-			{"Dawicki", "Kofok", zadanie::StanPacjenta::ZAGROZONY}
+			{"Dawicki", "Kofok", zadanie::StanPacjenta::ZDROWY}
 		};
 		std::cout << "Pacjent : ";
 		for (size_t i{ 0 }; i < std::size(kofokles); ++i)
@@ -37,7 +47,8 @@ namespace zadanie
 			std::cout << zp.imie << " " << zp.nazwisko << "\n";
 		}
 		
-		zadanie::StanPacjenta Stan{ zadanie::StanPacjenta::ZAGROZONY};
+		zadanie::StanPacjenta Stan{ zadanie::StanPacjenta::CHORY};
+		zadanie::ChorobaPacjenta Choroba{ zadanie::ChorobaPacjenta::ZLAMANIE };
 		std::cout << "Stan pacjenta : ";
 		switch (Stan)
 		{
@@ -46,12 +57,38 @@ namespace zadanie
 			break;
 		case zadanie::StanPacjenta::CHORY:
 			std::cout << "Chory!\n";
+			switch (Choroba)
+			{
+			case zadanie::ChorobaPacjenta::BIALACZKA:
+				std::cout << "Choroba Pacjenta : Bialaczka\n";
+				break;
+			case zadanie::ChorobaPacjenta::ZATRUCIE_POKARMOWE:
+				std::cout << "Choroba Pacjenta : Zatrucie pokarmowe\n";
+				break;
+			case zadanie::ChorobaPacjenta::ZLAMANIE:
+				std::cout << "Choroba Pacjenta : Zlamanie\n";
+				break;
+			case zadanie::ChorobaPacjenta::BRAK:
+				break;
+			}
 			break;
 		case zadanie::StanPacjenta::ZAGROZONY:
 			std::cout << "Zagrozony!\n";
+			switch (Choroba)
+			{
+			case zadanie::ChorobaPacjenta::WSTRZAS_MOZGU:
+				std::cout << "Choroba Pacjenta : Wstrzas mozgu\n";
+				break;
+			case zadanie::ChorobaPacjenta::ZAWAL_SERCA:
+				std::cout << "Choroba Pacjenta : Zawal serca\n";
+				break;
+			}
 			break;
 		case zadanie::StanPacjenta::MARTWY:
 			std::cout << "Martwy!\n";
+			break;
+		case zadanie::StanPacjenta::WYMAGA_OPERACJI:
+			std::cout << "Wymaga operacji!\n";
 			break;
 		}
 		std::mt19937 mersenne{ (unsigned int)std::time(nullptr) };
@@ -62,6 +99,17 @@ namespace zadanie
 		case zadanie::StanPacjenta::ZDROWY:
 			break;
 		case zadanie::StanPacjenta::CHORY:
+			if (Choroba == zadanie::ChorobaPacjenta::ZLAMANIE);
+			if (szansa == 1)
+			{
+				std::cout << "Zlamanie zroslo sie poprawnie!\n";
+				break;
+			}
+			else
+			{
+				std::cout << "Zlamanie zroslo sie niepoprawnie!\n";
+				break;
+			}
 			if (szansa == 1)
 				std::cout << "Pacjent wyzdrowial!\n";
 			else
@@ -75,7 +123,22 @@ namespace zadanie
 			break;
 		case zadanie::StanPacjenta::MARTWY:
 			break;
+		case zadanie::StanPacjenta::WYMAGA_OPERACJI:
+			std::cout << "Czy zgadzasz sie na operacje?\n";
+			std::cin >> zgoda;
+			if (zgoda == "tak" || zgoda == "Tak" || zgoda == "TAK")
+			{
+				std::cout << "Wyraziles zgode na operacje. \nWynik operacji : \n";
+				if (szansa == 1)
+					std::cout << "Pacjent pomyslnie przeszedl operacje!\n";
+				else
+					std::cout << "Pacjent umarl!\n";
+			}
+			else
+				break;
+			break;
 		}
+
 		return 0;
 	}
 
