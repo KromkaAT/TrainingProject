@@ -9,13 +9,13 @@
 int main()
 { 
 	int pomidor{};
-	using std::cout;
+	using std::cout; // using
 	cout << "Siema mordo\nIle chcesz pomidorow kupic kurwa ten?\n";
 	std::cin >> pomidor;
 	cout << "Kupiles " << pomidor << " pomidorow\nPo co ci je?\n";
 	{
-		typedef unsigned long long onionsell_t;
-		using ilechcesz_t = short;
+		typedef unsigned long long onionsell_t; // Wykorzystanie typedef
+		using ilechcesz_t = short;				// Wykorzystanie using zamiast typedef
 		ilechcesz_t ile{};
 		onionsell_t sprzedane{ ile * 2ull };
 		do
@@ -27,12 +27,14 @@ int main()
 			break;
 			std::cout << "Kupiles " << ile << " cebuli\n";
 		} while (ile < 12);
-		std::mt19937 mersenne{ static_cast<std::mt19937::result_type>(std::time(nullptr)) };
+
+		std::mt19937 mersenne{ static_cast<std::mt19937::result_type>(std::time(nullptr)) }; // Ulepszony mersenne
 		std::uniform_int_distribution<> zakres{ 1, 15 };
 		long jaja{ zakres(mersenne) };
 		std::uniform_int_distribution<> jajecznica{ 0, 1 };
 		bool dobra{ static_cast<bool>(jajecznica(mersenne)) };
-		switch (ile)
+
+		switch (ile) // To co zrobisz z dana iloscia cebul
 		{
 		case 1:
 			std::cout << "Mozesz z tego zrobic nic\n";
@@ -78,7 +80,7 @@ int main()
 			break;
 		}
 		bool chcesz{};
-		std::cout << "A moze chcesz se jakies liczby binarne tu na leb se zobaczyc?\n(napisz 1 jak chcesz, a jak nie to 0 i wypad elo)\n";
+		std::cout << "A moze chcesz se jakies liczby binarne tu na leb se zobaczyc?\n(napisz 1 jak chcesz, a jak nie to 0 i wypad elo)\n"; // Liczby binarne
 		std::cin >> chcesz;
 		if (chcesz == 1)
 			std::cout << "To wybierz co chcesz zrobic\n";
@@ -90,7 +92,7 @@ int main()
 		char wybierz{};
 		bool przod{};
 		std::bitset<3> tako{ 0b110 };
-		std::cout << "Chcesz se przesunac bity? \n(t - chce, n - nie chce)\n";
+		std::cout << "Chcesz se przesunac bity? \n(t - chce, n - nie chce)\n"; // Przesuwanie bitów
 		std::cin >> wybierz;
 		if (wybierz == 't')
 		{
@@ -114,7 +116,7 @@ int main()
 		{
 			std::bitset<5> kolejny{ 0b10011u };
 			std::bitset<5> konf{ ~0b10011u };
-			std::cout << "Wybierz co chcesz teraz zrobic : \n ~ \n & \n | \n ^ \n e(exit) \n";
+			std::cout << "Wybierz co chcesz teraz zrobic : \n ~ \n & \n | \n ^ \n e(exit) \n"; // Bramki logiczne
 			std::cin >> bramki;
 			switch (bramki)
 			{
@@ -141,7 +143,7 @@ int main()
 			if (bramki == 'e')
 				break;
 		} while (true);
-		std::cout << typeid(14).name() << "\n\n\n\n"; 
+		std::cout << typeid(14).name() << "\n\n\n\n";  // Zdobywanie typu wartoœci
 	}
 	return 0;
 }
